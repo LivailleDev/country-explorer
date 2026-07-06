@@ -7,13 +7,13 @@ import NotFound from './pages/NotFound';
 export default function App() {
   return (
     <div className="min-h-screen font-sans">
-      <header className="sticky top-0 z-10 bg-white/90 shadow-sm backdrop-blur dark:bg-slate-800/90">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
-          <Link
-            to="/"
-            className="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white"
-          >
-            🌍 Atlas
+      <header className="border-b border-stone-200/80 dark:border-stone-800/80">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+          <Link to="/" className="group flex items-baseline gap-2">
+            <span className="font-serif text-2xl font-medium tracking-tight text-stone-900 dark:text-stone-50">
+              Atlas
+            </span>
+            <span className="eyebrow hidden sm:block">Country Explorer</span>
           </Link>
           <ThemeToggle />
         </div>
@@ -26,6 +26,12 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+
+      <footer className="mx-auto max-w-6xl px-6 py-10">
+        <p className="eyebrow">
+          Data · public-domain country dataset · flags via flagcdn
+        </p>
+      </footer>
     </div>
   );
 }

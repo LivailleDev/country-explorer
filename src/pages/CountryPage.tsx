@@ -7,9 +7,10 @@ import StateMessage from '../components/StateMessage';
 
 function Fact({ label, value }: { label: string; value: string }) {
   return (
-    <p className="text-sm">
-      <span className="font-semibold">{label}:</span> {value || 'N/A'}
-    </p>
+    <div className="flex flex-col gap-1 border-t border-stone-200 py-3 dark:border-stone-800">
+      <dt className="eyebrow">{label}</dt>
+      <dd className="text-stone-800 dark:text-stone-200">{value || 'N/A'}</dd>
+    </div>
   );
 }
 
@@ -41,12 +42,12 @@ export default function CountryPage() {
   }, [code]);
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-10">
+    <div className="mx-auto max-w-5xl px-6 py-12">
       <Link
         to="/"
-        className="mb-10 inline-flex items-center gap-2 rounded-lg bg-white px-6 py-2 text-sm font-semibold shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50 dark:bg-slate-800 dark:ring-slate-700 dark:hover:bg-slate-700"
+        className="eyebrow inline-flex items-center gap-2 transition hover:text-stone-900 dark:hover:text-stone-100"
       >
-        ← Back
+        <span aria-hidden="true">←</span> Back to all countries
       </Link>
 
       {status === 'loading' && <StateMessage title="Loading…" />}
@@ -58,37 +59,34 @@ export default function CountryPage() {
       )}
 
       {status === 'ready' && country && (
-        <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
+        <article className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-14">
           <img
             src={country.flag}
             alt={country.flagAlt}
-            className="w-full rounded-lg object-cover shadow-md ring-1 ring-slate-200 dark:ring-slate-700"
+            className="w-full rounded-xl border border-stone-200 object-cover shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)] dark:border-stone-800"
           />
           <div>
-            <h1 className="mb-6 text-3xl font-extrabold text-slate-900 dark:text-white">
+            <h1 className="font-serif text-4xl font-medium tracking-tight text-stone-900 dark:text-stone-50">
               {country.name}
             </h1>
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-              <div className="space-y-2">
-                <Fact label="Native Name" value={country.nativeName} />
-                <Fact
-                  label="Population"
-                  value={country.population ? formatPopulation(country.population) : 'N/A'}
-                />
-                <Fact label="Region" value={country.region} />
-                <Fact label="Sub Region" value={country.subregion} />
-                <Fact label="Capital" value={country.capital} />
-              </div>
-              <div className="space-y-2">
-                <Fact label="Top Level Domain" value={country.tld} />
-                <Fact label="Currencies" value={country.currencies.join(', ')} />
-                <Fact label="Languages" value={country.languages.join(', ')} />
-              </div>
-            </div>
+            <p className="mt-1 text-stone-500 dark:text-stone-400">{country.nativeName}</p>
+
+            <dl className="mt-8 grid grid-cols-1 sm:grid-cols-2 sm:gap-x-10">
+              <Fact
+                label="Population"
+                value={country.population ? formatPopulation(country.population) : 'N/A'}
+              />
+              <Fact label="Region" value={country.region} />
+              <Fact label="Sub Region" value={country.subregion} />
+              <Fact label="Capital" value={country.capital} />
+              <Fact label="Top Level Domain" value={country.tld} />
+              <Fact label="Currencies" value={country.currencies.join(', ')} />
+              <Fact label="Languages" value={country.languages.join(', ')} />
+            </dl>
 
             {country.borders.length > 0 && (
-              <div className="mt-8">
-                <h2 className="mb-3 font-semibold">Border Countries:</h2>
+              <div className="mt-10">
+                <p className="eyebrow mb-3">Border countries</p>
                 <div className="flex flex-wrap gap-2">
                   {(borders.length > 0
                     ? borders
@@ -97,7 +95,7 @@ export default function CountryPage() {
                     <Link
                       key={border.code}
                       to={`/country/${border.code}`}
-                      className="rounded bg-white px-4 py-1 text-sm shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50 dark:bg-slate-800 dark:ring-slate-700 dark:hover:bg-slate-700"
+                      className="rounded-full border border-stone-300 px-4 py-1.5 text-sm text-stone-700 transition hover:border-stone-900 hover:text-stone-900 dark:border-stone-700 dark:text-stone-300 dark:hover:border-stone-200 dark:hover:text-stone-100"
                     >
                       {border.name}
                     </Link>
@@ -106,7 +104,7 @@ export default function CountryPage() {
               </div>
             )}
           </div>
-        </div>
+        </article>
       )}
     </div>
   );

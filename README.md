@@ -46,10 +46,10 @@ React 19 · TypeScript · React Router 6 · Vite · Tailwind CSS · Vitest
 The catalog (250 countries) is served as a static JSON asset and fetched at runtime.
 The long-standing free **REST Countries** API was deprecated, and its v5 now requires an
 API key — which can't be embedded safely in a client-only SPA. So the dataset is built
-from the public-domain [mledoze/countries](https://github.com/mledoze/countries) data
-(population merged in from [countriesnow](https://countriesnow.space)) and flags come
-from [flagcdn](https://flagcdn.com). The API layer (`src/api/countries.ts`) is isolated,
-so swapping in a hosted backend later is a one-file change.
+from the public-domain [mledoze/countries](https://github.com/mledoze/countries) data,
+with recent population figures merged in from the [World Bank API](https://data.worldbank.org)
+and flags from [flagcdn](https://flagcdn.com). The API layer (`src/api/countries.ts`) is
+isolated, so swapping in a hosted backend later is a one-file change.
 
 ## Run locally
 
