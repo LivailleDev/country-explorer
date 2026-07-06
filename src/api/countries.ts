@@ -6,7 +6,9 @@ import { SAMPLE_COUNTRIES } from '../data/sampleCountries';
 // API key — which can't be embedded safely in a client-only SPA — so the data is
 // bundled and loaded over HTTP here. The api layer is isolated, so swapping in a
 // keyed backend later would only touch this file.
-const DATA_URL = '/data/countries.json';
+// Base-aware so it resolves correctly under the GitHub Pages sub-path in
+// production ('/country-explorer/data/...') and at the root in dev.
+const DATA_URL = `${import.meta.env.BASE_URL}data/countries.json`;
 
 async function fetchDataset(): Promise<CountryDetail[]> {
   const res = await fetch(DATA_URL);
