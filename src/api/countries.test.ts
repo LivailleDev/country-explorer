@@ -56,6 +56,7 @@ describe('toSummary', () => {
       population: 212559409,
       region: 'Americas',
       capital: 'Brasília',
+      ccn3: null,
     });
     expect(toSummary(brazil)).not.toHaveProperty('borders');
   });

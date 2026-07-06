@@ -7,31 +7,33 @@
 ![React Router](https://img.shields.io/badge/React%20Router-6-CA4245)
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF)
 
-A **single-page app** to explore every country in the world: search by name, filter
-by region, and open a detail page with the flag, capital, languages, currencies and
-clickable links to neighbouring countries — a natural showcase for **client-side
-routing**.
+A **single-page app** to explore the world through an **interactive map where every
+country is painted with its own flag**. Pan, zoom and click a country to open a detail
+page with its capital, languages, currencies and clickable links to its neighbours — a
+natural showcase for **client-side routing** and **data visualisation**.
 
 **🔗 Live demo:** https://livailledev.github.io/country-explorer/
 
 ## What this project demonstrates
 
-- **Client-side routing with React Router** — a country grid (`/`), a dynamic detail
-  route (`/country/:code`), a 404 route, and neighbour navigation that routes between
-  detail pages.
-- **TypeScript end to end** — typed domain models (`CountrySummary`, `CountryDetail`),
-  typed components and a generic `useDebounce<T>` hook.
-- **Data fetching done cleanly** — an isolated API layer with loading / empty / error
-  states, plus a bundled offline fallback so the app always renders.
-- **Pure, tested logic** — filtering (name + region) and formatting kept framework-free
-  and unit-tested separately from the UI.
-- **Accessible, responsive UI** — labelled controls, keyboard-focusable cards, a
-  light/dark theme (persisted), and a grid that adapts from phone to desktop.
+- **Interactive SVG data-viz** — a world map built with `d3-geo` + TopoJSON where each
+  country's territory is clipped and filled with its flag, with smooth pan/zoom (`d3-zoom`).
+- **Client-side routing with React Router** — the map (`/`), a dynamic detail route
+  (`/country/:code`), a 404 route, and neighbour navigation that routes between countries.
+- **TypeScript end to end** — typed domain models (`CountrySummary`, `CountryDetail`) and
+  typed components.
+- **Data fetching done cleanly** — an isolated API layer with loading / error states and a
+  bundled offline fallback so the app always renders.
+- **Pure, tested logic** — data normalisation and formatting kept framework-free and
+  unit-tested separately from the UI.
+- **Accessible, responsive UI** — a persisted light/dark theme, keyboard-focusable
+  controls, and respect for `prefers-reduced-motion`.
 - **Tested + CI** — Vitest + Testing Library, run on every push via GitHub Actions.
 
 ## Features
 
-- Search countries by name (debounced) and filter by region
+- **World map of flags** — each country filled with its flag; drag to pan, scroll to zoom
+- Hover a country to highlight it; click to open its detail page
 - Country detail page: native name, population, region, capital, currencies, languages
 - **Border countries** rendered as links that navigate between detail pages
 - Light / dark mode, remembered across visits
@@ -39,7 +41,7 @@ routing**.
 
 ## Tech
 
-React 19 · TypeScript · React Router 6 · Vite · Tailwind CSS · Vitest
+React 19 · TypeScript · React Router 6 · d3-geo · TopoJSON · Vite · Tailwind CSS · Vitest
 
 ## A note on the data
 
@@ -48,8 +50,10 @@ The long-standing free **REST Countries** API was deprecated, and its v5 now req
 API key — which can't be embedded safely in a client-only SPA. So the dataset is built
 from the public-domain [mledoze/countries](https://github.com/mledoze/countries) data,
 with recent population figures merged in from the [World Bank API](https://data.worldbank.org)
-and flags from [flagcdn](https://flagcdn.com). The API layer (`src/api/countries.ts`) is
-isolated, so swapping in a hosted backend later is a one-file change.
+and flags from [flagcdn](https://flagcdn.com). The map geometry is the
+[world-atlas](https://github.com/topojson/world-atlas) TopoJSON, matched to countries by
+ISO numeric code. The API layer (`src/api/countries.ts`) is isolated, so swapping in a
+hosted backend later is a one-file change.
 
 ## Run locally
 
@@ -65,8 +69,8 @@ npm test          # run the suite once (Vitest)
 npm run test:watch
 ```
 
-Tests cover the `useDebounce` hook (fake timers), the filtering/formatting logic, the
-API layer (success + offline fallback) and the `CountryCard` component.
+Tests cover the data/API layer (normalisation, lookup and offline fallback) and the pure
+filtering/formatting helpers.
 
 ## Build
 

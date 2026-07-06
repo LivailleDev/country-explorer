@@ -26,6 +26,7 @@ export function toSummary(country: CountryDetail): CountrySummary {
     population: country.population,
     region: country.region,
     capital: country.capital,
+    ccn3: country.ccn3 ?? null,
   };
 }
 

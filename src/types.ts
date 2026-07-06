@@ -7,6 +7,7 @@ export interface CountrySummary {
   population: number;
   region: string;
   capital: string;
+  ccn3?: string | null; // ISO 3166-1 numeric, used to match the map geometry
 }
 
 /** Full detail shown on the country page. Extends the summary. */
