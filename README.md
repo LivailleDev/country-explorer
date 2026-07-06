@@ -1,5 +1,6 @@
 # Atlas — Country Explorer
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-online-brightgreen)](https://livailledev.github.io/country-explorer/)
 [![CI](https://github.com/LivailleDev/country-explorer/actions/workflows/ci.yml/badge.svg)](https://github.com/LivailleDev/country-explorer/actions/workflows/ci.yml)
 ![React](https://img.shields.io/badge/React-19-61DAFB)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6)
@@ -11,7 +12,7 @@ by region, and open a detail page with the flag, capital, languages, currencies 
 clickable links to neighbouring countries — a natural showcase for **client-side
 routing**.
 
-<!-- Add after deploy: **🔗 Live demo:** https://... -->
+**🔗 Live demo:** https://livailledev.github.io/country-explorer/
 
 ## What this project demonstrates
 
